@@ -110,8 +110,9 @@ class GeminiRobot(AbstractRobot):
         try:
             url = "https://cloud-aiplatform.googleapis.com/v1/projects/{self.gemini_project_id}/models/{self.gemini_model_name}/predict"
             headers = {"Authorization": "Bearer " + self.gemini_key}
-            data = {"prompt": '聊天机器人', "input_data": msg}
-
+            data = {
+                "text": msg
+            }
             r = requests.post(url, headers=headers, json=data)
             respond = r.json()
             
