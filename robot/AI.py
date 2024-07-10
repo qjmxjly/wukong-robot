@@ -85,14 +85,14 @@ class GeminiRobot(AbstractRobot):
 
     SLUG = "gemini"
 
-    def __init__(self, tuling_key):
+    def __init__(self, gemini_key, gemini_project_id, gemini_model_name):
         """
         gemini机器人
         """
         super(self.__class__, self).__init__()
         self.gemini_key = gemini_key
-        self.gemini_project_id = project_id
-        self.gemini_model_name = model_name
+        self.gemini_project_id = gemini_project_id
+        self.gemini_model_name = gemini_model_name
 
     @classmethod
     def get_config(cls):
