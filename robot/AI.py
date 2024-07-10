@@ -113,9 +113,10 @@ class GeminiRobot(AbstractRobot):
             data = {"prompt": '聊天机器人', "input_data": msg}
 
             r = requests.post(url, headers=headers, json=data)
-            respond = json.loads(r)
+            respond = r.json()
+            
             if(respond):
-                result = respond
+                result = respond["predicted_text"]
             else:
                 result = "gemini机器人服务异常，请联系作者"
             logger.info(f"{self.SLUG} 回答：{result}")
