@@ -3,6 +3,7 @@ import os
 import json
 import random
 import requests
+import google.generativeai as genai
 
 from uuid import getnode as get_mac
 from abc import ABCMeta, abstractmethod
@@ -108,16 +109,12 @@ class GeminiRobot(AbstractRobot):
         msg = "".join(texts)
         msg = utils.stripPunctuation(msg)
         try:
-            url = "https://cloud-aiplatform.googleapis.com/v1/projects/{self.gemini_project_id}/models/{self.gemini_model_name}/predict"
-            headers = {"Authorization": "Bearer " + self.gemini_key}
-            data = {
-                "text": msg
-            }
-            r = requests.post(url, headers=headers, json=data)
-            respond = r.json()
-            
-            if(respond):
-                result = respond["predicted_text"]
+            genai.configure(api_key=self.gemini_key)
+            model = genai.GenerativeModel(self.gemini_model_name)
+
+            response = model.generate_content(msg)            
+            if(response):
+                result = response.text
             else:
                 result = "gemini机器人服务异常，请联系作者"
             logger.info(f"{self.SLUG} 回答：{result}")
