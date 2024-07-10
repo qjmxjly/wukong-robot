@@ -81,7 +81,51 @@ class TulingRobot(AbstractRobot):
             )
             return "抱歉, 图灵机器人服务回答失败"
 
+class GeminiRobot(AbstractRobot):
 
+    SLUG = "gemini"
+
+    def __init__(self, tuling_key):
+        """
+        gemini机器人
+        """
+        super(self.__class__, self).__init__()
+        self.gemini_key = gemini_key
+        self.gemini_project_id = project_id
+        self.gemini_model_name = model_name
+
+    @classmethod
+    def get_config(cls):
+        return config.get("gemini", {})
+
+    def chat(self, texts, parsed=None):
+        """
+        使用gemini机器人聊天
+
+        Arguments:
+        texts -- user input, typically speech, to be parsed by a module
+        """
+        msg = "".join(texts)
+        msg = utils.stripPunctuation(msg)
+        try:
+            url = "https://cloud-aiplatform.googleapis.com/v1/projects/{self.gemini_project_id}/models/{self.gemini_model_name}/predict"
+            headers = {"Authorization": "Bearer " + self.gemini_key}
+            data = {"prompt": '聊天机器人', "input_data": msg}
+
+            r = requests.post(url, headers=headers, json=data)
+            respond = json.loads(r)
+            if(respond):
+                result = respond
+            else:
+                result = "gemini机器人服务异常，请联系作者"
+            logger.info(f"{self.SLUG} 回答：{result}")
+            return result
+        except Exception:
+            logger.critical(
+                "gemini robot failed to response for %r", msg, exc_info=True
+            )
+            return "抱歉,gemini机器人服务回答失败"
+        
 class UnitRobot(AbstractRobot):
 
     SLUG = "unit"
