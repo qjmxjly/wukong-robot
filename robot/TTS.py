@@ -348,7 +348,10 @@ class EdgeTTS(AbstractTTS):
     """
 
     SLUG = "edge-tts"
-
+    punctuation = [
+        "\n",
+        "*",
+    ]
     def __init__(self, voice="zh-CN-XiaoxiaoNeural", **args):
         super(self.__class__, self).__init__()
         self.voice = voice
@@ -359,6 +362,8 @@ class EdgeTTS(AbstractTTS):
         return config.get("edge-tts", {})
 
     async def async_get_speech(self, phrase):
+        for p in self.punctuation:
+            phrase = phrase.replace(p, "")
         try:
             tmpfile = os.path.join(constants.TEMP_PATH, uuid.uuid4().hex + ".mp3")
             tts = edge_tts.Communicate(text=phrase, voice=self.voice)
