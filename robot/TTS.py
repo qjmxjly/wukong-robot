@@ -366,7 +366,7 @@ class EdgeTTS(AbstractTTS):
             phrase = phrase.replace(p, "")
         try:
             tmpfile = os.path.join(constants.TEMP_PATH, uuid.uuid4().hex + ".mp3")
-            tts = edge_tts.Communicate(text=phrase, voice=self.voice)
+            tts = edge_tts.Communicate(text=phrase, voice=self.voice, connect_timeout=10, receive_timeout=20)
             await tts.save(tmpfile)    
             logger.info(f"{self.SLUG} 语音合成成功，合成路径：{tmpfile}")
             return tmpfile
