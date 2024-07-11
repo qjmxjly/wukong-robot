@@ -27,22 +27,26 @@
 
 ## Table of Contents
 
-* [特性](#特性)
-* [Demo](#demo)
-* [环境要求](#环境要求)
-* [安装](#安装)
-* [升级](#升级)
-* [运行](#运行)
-* [配置](#配置)
-* [技能插件](#插件)
-* [API接口](#api-接口)
-* [捐赠](#捐赠)
-* [贡献](#贡献)
-* [引用](#引用)
-* [联系](#联系)
-* [感谢](#感谢)
-* [FAQ](#faq)
-* [免责声明](#免责声明)
+- [wukong-robot](#wukong-robot)
+  - [Table of Contents](#table-of-contents)
+  - [特性](#特性)
+  - [Demo](#demo)
+  - [环境要求](#环境要求)
+    - [Python 版本](#python-版本)
+    - [设备要求](#设备要求)
+  - [安装](#安装)
+  - [升级](#升级)
+  - [运行](#运行)
+  - [配置](#配置)
+  - [技能插件](#技能插件)
+  - [API 接口](#api-接口)
+  - [捐赠](#捐赠)
+  - [贡献](#贡献)
+  - [引用](#引用)
+  - [联系](#联系)
+  - [感谢](#感谢)
+  - [Star 历史](#star-历史)
+  - [免责声明](#免责声明)
 
 ## 特性
 
@@ -110,6 +114,9 @@ wukong-robot 支持运行在以下的设备和系统中：
 ## 安装 ##
 
 见 [wukong-robot 安装教程](https://wukong.hahack.com/#/install) 。
+
+sudo apt-get install portaudio19-dev sox pulseaudio libsox-fmt-all ffmpeg libatlas-base-dev
+
 
 ## 升级
 
